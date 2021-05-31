@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+            h1,h2,h3,h4,h5,h6,div,p,span{font-family:helvetica;padding:0;margin:0;}
+			input{width:150px;}
+			#app{border:2px solid red;padding:10px 5px;}
+			.comp_root{border:2px solid blue;padding:10px 5px}
+			p{color:white;background:red}
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.18/vue.min.js"></script>
+    <script type='text/javascript' src='vue.js'></script>
+    <title>Vue Emit Self Defined Event</title>
+</head>
+<body>
+    <div id='app'>
+        <h1>Parent DIV</h1>
+        <comp v-on:relay='allocate'></comp><hr/>
+        <p>{{content1}}</p><hr/>
+        <p>{{content2}}</p>
+    </div>
+    <template id='temp'>
+        <div class='comp_root'>
+            <h2>Component</h2>
+            <input v-model='message1'/><hr/>
+            <input v-model='message2'/>
+            <button v-on:click='send'>Send Data</button>
+        </div>
+    </template>
+    <script type='text/javascript'>
+        // this is a global components
+        var vm = Vue.component('comp',{
+            template:'#temp',
+            data: function(){
+                return{
+                    message1:'Message 1',
+                    message2:'Message 2',
+                }
+            },
+            props:[],
+            methods:{
+                send:function(){
+                    this.$emit('relay', this.message1, this.message2)
+                }
+            },
+        })
+        var vm = new Vue({
+            el: '#app',
+            data:{
+                content1:"Content1",
+                content2:"Content2",
+            },
+            methods: {
+                allocate: function(v1, v2) {
+                    this.content1 = v1
+                    this.content2 = v2
+                }
+            }
+        })
+    </script>
+</body>
+</html>

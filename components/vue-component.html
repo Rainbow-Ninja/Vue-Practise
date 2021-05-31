@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        h1, h2, h3, h4, h5, h6, div, p, span{font-family: helvetica; padding: 0; margin: 0;}
+        .comp_root{background:red;color:white;}
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.18/vue.min.js"></script>
+    <script type='text/javascript' src='vue.js'></script>
+    <title>Vue Global Components</title>
+</head>
+<body>
+    <div id='app'>
+        <simple_comp></simple_comp>
+    </div>
+    <template id='temp'>
+        <div class='comp_root'>
+            <p>This is a component</p>
+            <p>{{message}}</p>
+            <p>{{message_1}}</p>
+        </div>
+    </template>
+    <script type='text/javascript'>
+        Vue.component('simple_comp',{
+            template:'#temp',
+            data: function(){
+                return{
+                    message:"Component's own data",
+                    message_1:"More own data!!",
+                }
+            },
+            props:[],
+            methods:{},
+        })
+        var vm = new Vue ({
+            el:'#app',
+            data:{},
+            computed:{},
+            methods:{},
+        })
+
+    </script>
+</body>
+</html>

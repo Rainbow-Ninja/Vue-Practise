@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        h1, h2, h3, h4, h5, h6, div, p, span{font-family: helvetica; padding: 0; margin: 0;}
+        .comp_root{background:red;color:white;}
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.18/vue.min.js"></script>
+    <script type='text/javascript' src='vue.js'></script>
+    <title>Vue Local Components</title>
+</head>
+<body>
+    <div id='app1'>
+        <p>VM 1</p>
+        <comp></comp>
+    </div>
+    <hr/>
+    <div id='app2'>
+        <p>VM 2</p>
+        <comp></comp>
+    </div>
+    <template id='temp'>
+        <div class='comp_root'>
+            <p>This is a component</p>
+        </div>
+    </template>
+    <script type='text/javascript'>
+        // this is a global components
+        // Vue.component('comp',{
+        //     template:'#temp',
+        //     data: function(){
+        //         return{
+                    
+        //         }
+        //     },
+        //     props:[],
+        //     methods:{},
+        // })
+        // these two are local components
+        var vm1 = new Vue({
+            el:'#app1',
+            components: {
+                comp:{
+                    template:'#temp',
+                    data: function(){
+                        return{}
+                    },
+                    props:[],
+                    methods:{},
+                }
+            }
+        })
+        var vm2 = new Vue({
+            el:'#app2',
+        })
+
+    </script>
+</body>
+</html>
